@@ -326,7 +326,7 @@ function mu_hr_registration_check_cas() {
 		phpCAS::forceAuthentication();
 
 		$cas_username      = phpCAS::getUser();
-		// $instructor        = get_field( 'mu_training_instructor', $training_session_id() )['instructor_username'];
+		$instructor        = get_field( 'mu_training_instructor', $training_session_id() );
 		// $backup_instructor = get_field( 'mu_training_instructor', $training_session_id() )['backup_instructor_username'];
 
 		// if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
