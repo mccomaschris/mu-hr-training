@@ -296,6 +296,12 @@ add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 15 );
 function mu_hr_registration_check_cas() {
 	if ( is_page( 'registered-list' ) ) {
 
+		if ( ! get_query_var( 'courseID' ) ) {
+			return 'Sorry that course was not found.';
+		} else {
+			$training_session_id = get_query_var( 'courseID' );
+		}
+
 		require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 		if ( ! lockr_get_key( 'cas_host' ) ) {
@@ -320,18 +326,16 @@ function mu_hr_registration_check_cas() {
 		phpCAS::forceAuthentication();
 
 		$cas_username      = phpCAS::getUser();
-		// $instructor        = get_field( 'mu_training_instructor', get_queried_object_id() )['instructor_username'];
-		// $backup_instructor = get_field( 'mu_training_instructor', get_queried_object_id() )['backup_instructor_username'];
 
-		echo 'id: ' . get_queried_object_id();
-		echo 'field: ' . get_field( 'mu_training_instructor', get_queried_object_id() );
-				// echo 'Instructor: ' . $instructor . '<br><hr>';
-		// echo 'Backup Instructor: ' . $backup_instructor . '<br><hr>';
-		// if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
-		// 	die( 'hi! welcome to your class' );
-		// } else {
-		// 	die( 'you are not the instructor' );
-		// }
+
+		$instructor        = get_field( 'mu_training_instructor', $training_session_id() )['instructor_username'];
+		$backup_instructor = get_field( 'mu_training_instructor', $training_session_id() )['backup_instructor_username'];
+
+		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
+			die( 'hi! welcome to your class' );
+		} else {
+			die( 'you are not the instructor' );
+		}
 	}
 }
 add_action( 'template_redirect', 'mu_hr_registration_check_cas' );
