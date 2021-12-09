@@ -326,14 +326,14 @@ function mu_hr_registration_check_cas() {
 		phpCAS::forceAuthentication();
 
 		$cas_username      = phpCAS::getUser();
-		$instructor        = get_field( 'mu_training_instructor', $training_session_id() );
-		// $backup_instructor = get_field( 'mu_training_instructor', $training_session_id() )['backup_instructor_username'];
+		$instructor        = get_field( 'mu_training_instructor', $training_session_id )['instructor_username'];
+		$backup_instructor = get_field( 'mu_training_instructor', $training_session_id )['backup_instructor_username'];
 
-		// if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
-		// 	die( 'hi! welcome to your class' );
-		// } else {
-		// 	die( 'you are not the instructor' );
-		// }
+		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
+			die( 'hi! welcome to your class' );
+		} else {
+			die( 'you are not the instructor' );
+		}
 	}
 }
 add_action( 'template_redirect', 'mu_hr_registration_check_cas' );
