@@ -302,40 +302,38 @@ function mu_hr_registration_check_cas() {
 			$training_session_id = get_query_var( 'courseID' );
 		}
 
-		require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+		// require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
-		if ( ! lockr_get_key( 'cas_host' ) ) {
-			exit;
-		}
+		// if ( ! lockr_get_key( 'cas_host' ) ) {
+		// 	exit;
+		// }
 
-		$cas_port    = 443;
-		$cas_context = '/cas';
+		// $cas_port    = 443;
+		// $cas_context = '/cas';
 
-		if ( lockr_get_key( 'cas_port' ) ) {
-			$cas_port = intval( lockr_get_key( 'cas_port' ) );
-		}
+		// if ( lockr_get_key( 'cas_port' ) ) {
+		// 	$cas_port = intval( lockr_get_key( 'cas_port' ) );
+		// }
 
-		if ( lockr_get_key( 'cas_context' ) ) {
-			$cas_context = lockr_get_key( 'cas_context' );
-		}
+		// if ( lockr_get_key( 'cas_context' ) ) {
+		// 	$cas_context = lockr_get_key( 'cas_context' );
+		// }
 
-		phpCAS::setVerbose( true );
+		// phpCAS::setVerbose( true );
 
-		phpCAS::client( CAS_VERSION_3_0, lockr_get_key( 'cas_host' ), 443, '/cas' );
-		phpCAS::setNoCasServerValidation();
-		phpCAS::forceAuthentication();
+		// phpCAS::client( CAS_VERSION_3_0, lockr_get_key( 'cas_host' ), 443, '/cas' );
+		// phpCAS::setNoCasServerValidation();
+		// phpCAS::forceAuthentication();
 
-		$cas_username      = phpCAS::getUser();
+		// $cas_username      = phpCAS::getUser();
+		// $instructor        = get_field( 'mu_training_instructor', $training_session_id() )['instructor_username'];
+		// $backup_instructor = get_field( 'mu_training_instructor', $training_session_id() )['backup_instructor_username'];
 
-
-		$instructor        = get_field( 'mu_training_instructor', $training_session_id() )['instructor_username'];
-		$backup_instructor = get_field( 'mu_training_instructor', $training_session_id() )['backup_instructor_username'];
-
-		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
-			die( 'hi! welcome to your class' );
-		} else {
-			die( 'you are not the instructor' );
-		}
+		// if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
+		// 	die( 'hi! welcome to your class' );
+		// } else {
+		// 	die( 'you are not the instructor' );
+		// }
 	}
 }
 add_action( 'template_redirect', 'mu_hr_registration_check_cas' );
