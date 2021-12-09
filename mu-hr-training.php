@@ -320,17 +320,17 @@ function mu_hr_registration_check_cas() {
 		phpCAS::forceAuthentication();
 
 		$cas_username      = phpCAS::getUser();
-		$instructor        = get_field( 'mu_training_instructor', get_queried_object_id() )['instructor_username'];
-		$backup_instructor = get_field( 'mu_training_instructor', get_queried_object_id() )['backup_instructor_username'];
+		// $instructor        = get_field( 'mu_training_instructor', get_queried_object_id() )['instructor_username'];
+		// $backup_instructor = get_field( 'mu_training_instructor', get_queried_object_id() )['backup_instructor_username'];
 
-		echo 'Instructor: ' . $instructor . '<br><hr>';
-		echo 'Backup Instructor: ' . $backup_instructor . '<br><hr>';
-		echo 'Cas: ' . $cas_username . '<br><hr>';
-		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
-			die( 'hi! welcome to your class' );
-		} else {
-			die( 'you are not the instructor' );
-		}
+		// echo 'Instructor: ' . $instructor . '<br><hr>';
+		// echo 'Backup Instructor: ' . $backup_instructor . '<br><hr>';
+		echo 'Cas: ' . phpCAS::getUser() . '<br><hr>';
+		// if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
+		// 	die( 'hi! welcome to your class' );
+		// } else {
+		// 	die( 'you are not the instructor' );
+		// }
 	}
 }
 add_action( 'template_redirect', 'mu_hr_registration_check_cas' );
