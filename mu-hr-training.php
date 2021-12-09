@@ -323,6 +323,9 @@ function mu_hr_registration_check_cas() {
 		$instructor        = get_field( 'mu_training_instructor', get_queried_object_id() )['instructor_username'];
 		$backup_instructor = get_field( 'mu_training_instructor', get_queried_object_id() )['backup_instructor_username'];
 
+		echo 'Instructor: ' . $instructor . '<br><hr>';
+		echo 'Backup Instructor: ' . $backup_instructor . '<br><hr>';
+		echo 'Cas: ' . $cas_username . '<br><hr>';
 		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
 			die( 'hi! welcome to your class' );
 		} else {
