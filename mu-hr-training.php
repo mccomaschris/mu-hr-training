@@ -330,9 +330,10 @@ function mu_hr_registration_check_cas() {
 		$backup_instructor = get_field( 'mu_training_instructor', $training_session_id )['backup_instructor_username'];
 
 		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
-			die( 'hi! welcome to your class' );
+			return;
 		} else {
-			die( 'you are not the instructor' );
+			header( 'HTTP/1.0 403 Forbidden' );
+			die( 'You are not allowed to access this file.' );
 		}
 	}
 }
