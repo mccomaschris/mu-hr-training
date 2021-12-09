@@ -1,0 +1,14 @@
+{
+    "require": {
+        "paulthewalton/acf-stubs": "^5.8",
+        "paulthewalton/acf-pro-stubs": "5.8.9.1",
+		"squizlabs/php_codesniffer": "3.*",
+        "wp-coding-standards/wpcs": "^2.3",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "nesbot/carbon": "^2.55",
+        "jasig/phpcas": "^1.4"
+    },
+    "require-dev": {
+        "mccomaschris/lockr-stubs": "^3.0"
+    }
+}
