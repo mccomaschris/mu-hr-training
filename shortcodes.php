@@ -26,20 +26,19 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 
 	$html = '';
 
-	echo 'query var: ' . get_query_var( 'courseID' );
-	if ( ! get_query_var( 'courseID' ) ) {
+	if ( ! get_query_var( 'courseid' ) ) {
 		return 'Sorry that course was not found.';
 	} else {
 
-		$training_session = get_post( get_query_var( 'courseID' ) );
-		$seats_total      = get_post_meta( get_query_var( 'courseID' ), 'mu_training_training_seats', true );
+		$training_session = get_post( get_query_var( 'courseid' ) );
+		$seats_total      = get_post_meta( get_query_var( 'courseid' ), 'mu_training_training_seats', true );
 
 		$registrations = get_posts(
 			array(
 				'numberposts' => -1,
 				'post_type'   => 'mu-registrations',
 				'meta_key'    => 'muhr_registration_training_session',
-				'meta_value'  => get_query_var( 'courseID' ),
+				'meta_value'  => get_query_var( 'courseid' ),
 			)
 		);
 
@@ -86,7 +85,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 					'field_61ae474469cfc', // phone number.
 				),
 				'submit_value'       => 'Register',
-				'html_after_fields'  => '<input type="hidden" name="acf[field_61ae470969cf8]" value="' . esc_attr( get_query_var( 'courseID' ) ) . '" />',
+				'html_after_fields'  => '<input type="hidden" name="acf[field_61ae470969cf8]" value="' . esc_attr( get_query_var( 'courseid' ) ) . '" />',
 				'html_before_fields' => '<div>' . $training_info . '</div>',
 			)
 		);
@@ -110,10 +109,10 @@ function mu_hr_registration_registration_list( $atts, $content = null ) {
 		$atts
 	);
 
-	if ( ! get_query_var( 'courseID' ) ) {
+	if ( ! get_query_var( 'courseid' ) ) {
 		return 'Sorry that course was not found.';
 	} else {
-		$training_session = get_post( get_query_var( 'courseID' ) );
+		$training_session = get_post( get_query_var( 'courseid' ) );
 
 		$registrations = get_posts(
 			array(
@@ -129,7 +128,7 @@ function mu_hr_registration_registration_list( $atts, $content = null ) {
 					),
 					'session_id' => array(
 						'key'   => 'muhr_registration_training_session',
-						'value' => get_query_var( 'courseID' ),
+						'value' => get_query_var( 'courseid' ),
 					),
 				),
 				'orderby'     => array(

@@ -234,13 +234,13 @@ function mu_hr_training_training_taxonomy_query( $query ) {
 add_action( 'pre_get_posts', 'mu_hr_training_training_taxonomy_query' );
 
 /**
- * Add 'courseID' to the acceptable URL parameters
+ * Add 'courseid' to the acceptable URL parameters
  *
  * @param array $vars The array of acceptable URL parameters.
  * @return array
  */
 function mu_hr_training_query_parameter( $vars ) {
-	$vars[] = 'courseID';
+	$vars[] = 'courseid';
 	return $vars;
 }
 add_filter( 'query_vars', 'mu_hr_training_query_parameter' );
@@ -311,10 +311,10 @@ add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 15 );
 function mu_hr_registration_check_cas() {
 	if ( is_page( 'registered-list' ) ) {
 
-		if ( ! get_query_var( 'courseID' ) ) {
+		if ( ! get_query_var( 'courseid' ) ) {
 			return 'Sorry that course was not found.';
 		} else {
-			$training_session_id = get_query_var( 'courseID' );
+			$training_session_id = get_query_var( 'courseid' );
 		}
 
 		require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';

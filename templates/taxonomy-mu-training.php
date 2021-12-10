@@ -53,13 +53,13 @@ require get_template_directory() . '/template-parts/hero/no-hero.php';
 									<?php
 									if ( $seats_left > 0 ) {
 										?>
-										<a href="<?php echo esc_url( home_url() ); ?>/training/registration/?courseID=<?php echo esc_attr( get_the_ID() ); ?>" class="font-semibold"><?php the_title(); ?></a>
+										<a href="<?php echo esc_url( home_url() ); ?>/training/registration/?courseid=<?php echo esc_attr( get_the_ID() ); ?>" class="font-semibold"><?php the_title(); ?></a>
 									<?php } else { ?>
 										<span class="font-semibold"><?php the_title(); ?></span>
 									<?php } ?>
 									<div class="text-sm"><span class="font-semibold">Location:</span> <?php echo esc_attr( get_field( 'mu_training_training_location', get_the_ID() ) ); ?></div>
 									<div class="text-sm"><?php echo esc_attr( Carbon::parse( get_field( 'mu_training_start_time', get_the_ID() ) )->format( 'F j, g:ia' ) ); ?> - <?php echo esc_attr( Carbon::parse( get_field( 'mu_training_end_time', get_the_ID() ) )->format( 'g:ia' ) ); ?> · <span class="font-semibold"><?php echo esc_attr( $seats_left ); ?></span> spots remaining</div> <span class="hidden">Seats taken: <?php echo intval( count( $registrations ) ); ?></span>
-									<div class="text-sm"><span class="font-semibold">Instructor:</span> (<a href="<?php echo esc_url( home_url() ); ?>/training/registered-list/?courseID=<?php echo esc_attr( get_the_ID() ); ?>">Instructor Access</a>)</div>
+									<div class="text-sm"><span class="font-semibold">Instructor:</span> (<a href="<?php echo esc_url( home_url() ); ?>/training/registered-list/?courseid=<?php echo esc_attr( get_the_ID() ); ?>">Instructor Access</a>)</div>
 									<?php
 									if ( get_field( 'mu_training_course_description', get_the_ID() ) ) {
 										?>
@@ -72,7 +72,7 @@ require get_template_directory() . '/template-parts/hero/no-hero.php';
 									<?php
 									if ( $seats_left > 0 ) {
 										?>
-										<a href="<?php echo esc_url( home_url() ); ?>/training/registration/?courseID=<?php echo esc_attr( get_the_ID() ); ?>" class="btn btn-green">Register</a>
+										<a href="<?php echo esc_url( home_url() ); ?>/training/registration/?courseid=<?php echo esc_attr( get_the_ID() ); ?>" class="btn btn-green">Register</a>
 									<?php } else { ?>
 										<div class="mt-6 btn bg-gray-300 text-gray-500 cursor-not-allowed">Course Full</div>
 									<?php } ?>
