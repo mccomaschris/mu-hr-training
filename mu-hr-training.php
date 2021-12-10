@@ -288,7 +288,7 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 	if ( get_field( 'muhr_registration_email_address', $post_id ) ) {
 		$training_session = get_post( get_field( 'muhr_registration_training_session', $post_id ) );
 
-		$course_name       = get_field( '', $training_session->ID );
+		$course_name       = $training_session->post_title;
 		$course_location   = get_field( 'mu_training_training_location', $training_session->ID );
 		$course_day        = Carbon::parse( get_field( 'mu_training_start_time', $training_session->ID ) )->format( 'F j, Y' );
 		$course_start_time = Carbon::parse( get_field( 'mu_training_start_time', $training_session->ID ) )->format( 'g:i a' );
@@ -340,11 +340,14 @@ function mu_hr_registration_check_cas() {
 		phpCAS::setNoCasServerValidation();
 		phpCAS::forceAuthentication();
 
-		$cas_username      = phpCAS::getUser();
-		$instructor        = get_field( 'mu_training_instructor', $training_session_id )['instructor_username'];
-		$backup_instructor = get_field( 'mu_training_instructor', $training_session_id )['backup_instructor_username'];
+		$admins     = get_field( 'mu_hr_administrators', 'option' );
+		$can_access = explode( ',', $admins );
 
-		if ( $cas_username === $instructor || $cas_username === $backup_instructor ) {
+		$can_access[] = get_field( 'mu_training_instructor', $training_session_id )['instructor_username'];
+		$can_access[] = get_field( 'mu_training_instructor', $training_session_id )['backup_instructor_username'];
+
+		die( '<pre>' . print_r( $can_access ) . '</pre>' );
+		if ( in_array( phpCAS::getUser(), $can_access, true ) ) {
 			return;
 		} else {
 			header( 'HTTP/1.0 403 Forbidden' );
@@ -364,6 +367,18 @@ function mu_hr_training_no_cache_on_regisration_list_page() {
 	}
 }
 add_action( 'template_redirect', 'mu_hr_training_no_cache_on_regisration_list_page' );
+
+if ( function_exists( 'acf_add_options_page' ) ) {
+	acf_add_options_page(
+		array(
+			'page_title' => 'HR Registration Settings',
+			'menu_title' => 'HR Registration Settings',
+			'menu_slug'  => 'hr-registration-settings',
+			'capability' => 'edit_posts',
+			'redirect'   => false,
+		)
+	);
+}
 
 add_action( 'init', 'mu_hr_training_custom_taxonomy' );
 add_action( 'init', 'mu_hr_training_session_post_type' );

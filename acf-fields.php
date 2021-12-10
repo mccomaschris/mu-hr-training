@@ -3,6 +3,50 @@
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
+		'key' => 'group_61b3554995d83',
+		'title' => 'HR Registration Settings',
+		'fields' => array(
+			array(
+				'key' => 'field_61b355536b031',
+				'label' => 'HR Administrators',
+				'name' => 'mu_hr_administrators',
+				'type' => 'text',
+				'instructions' => 'This feel should be a comma separated list of MUNet user names that can access <strong>all</strong> registration list pages.',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'options_page',
+					'operator' => '==',
+					'value' => 'hr-registration-settings',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	));
+
+	acf_add_local_field_group(array(
 		'key' => 'group_61ae4702b21b9',
 		'title' => 'Registration',
 		'fields' => array(
@@ -359,27 +403,6 @@ if( function_exists('acf_add_local_field_group') ):
 				'min' => '',
 				'max' => '',
 				'step' => '',
-			),
-			array(
-				'key' => 'field_61ae1ed9eac84',
-				'label' => 'Training Seats Taken',
-				'name' => 'training_seats_taken',
-				'type' => 'number',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => 0,
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'min' => '',
-				'max' => '',
-				'step' => 1,
 			),
 			array(
 				'key' => 'field_61ae1ef3638a6',
