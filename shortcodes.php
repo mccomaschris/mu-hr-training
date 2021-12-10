@@ -26,6 +26,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 
 	$html = '';
 
+	echo 'query var: ' . get_query_var( 'courseID' );
 	if ( ! get_query_var( 'courseID' ) ) {
 		return 'Sorry that course was not found.';
 	} else {
