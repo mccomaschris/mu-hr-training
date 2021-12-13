@@ -34,7 +34,7 @@ add_action( 'init', 'mu_hr_training_form_head' );
  * @return array
  */
 function mu_hr_registration_update_title( $data ) {
-	if ( 'mu-registrations' !== $data['post_type'] || is_admin() ) {
+	if ( 'mu-registrations' !== $data['post_type'] ) {
 		return;
 	}
 
