@@ -186,7 +186,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'maxlength' => '',
 			),
 			array(
-				'key' => 'field_61ae4774ab7b2',
+				'key' => 'field_61b7623675d6c',
 				'label' => 'Registration Date',
 				'name' => 'muhr_registration_registration_date',
 				'type' => 'date_time_picker',
@@ -199,7 +199,7 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'display_format' => 'm/d/Y g:i a',
-				'return_format' => 'Y-m-d H:i:s',
+				'return_format' => 'd/m/Y g:i a',
 				'first_day' => 0,
 			),
 		),
