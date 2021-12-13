@@ -23,7 +23,9 @@ add_action( 'wp_enqueue_scripts', 'mu_hr_training_acf_form_deregister_styles' );
  * Register acf_form_head
  */
 function mu_hr_training_form_head() {
-	acf_form_head();
+	if ( ! is_admin() ) {
+		acf_form_head();
+	}
 }
 add_action( 'init', 'mu_hr_training_form_head' );
 
@@ -33,21 +35,22 @@ add_action( 'init', 'mu_hr_training_form_head' );
  * @param array $data The array of post data.
  * @return array
  */
-function mu_hr_registration_update_title( $data ) {
-	if ( 'mu-registrations' !== $data['post_type'] ) {
-		return;
-	}
+// function mu_hr_registration_update_title( $data ) {
+// 	if ( 'mu-registrations' !== $data['post_type'] ) {
+// 		return;
+// 	}
 
-	if ( isset( $_POST['acf']['field_61ae472969cf9'] ) && isset( $_POST['acf']['field_61ae473469cfa'] ) ) {
-		$first_name = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
-		$last_name  = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae473469cfa'] ) );
+// 	if ( isset( $_POST['acf']['field_61ae472969cf9'] ) && isset( $_POST['acf']['field_61ae473469cfa'] ) ) {
+// 		$first_name = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
+// 		$last_name  = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae473469cfa'] ) );
 
-		$data['post_title'] = 'Registration from ' . $first_name . ' ' . $last_name;
-	}
+// 		$data['post_title'] = 'Registration from ' . $first_name . ' ' . $last_name;
+// 	}
 
-	return $data;
-}
+// 	return $data;
+// }
 // add_filter( 'wp_insert_post_data', 'mu_hr_registration_update_title', '99', 1 );
+
 /**
  * Add title and registration date to register post type
  *
@@ -58,7 +61,22 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		return;
 	}
 
+	if ( 'new' !== $post_id ) {
+		return $post_id;
+	}
+
 	update_field( 'muhr_registration_registration_date', Carbon::now()->timezone( 'America/Detroit' ), $post_id );
+
+	$updated_post = array(
+		'ID'         => $post_id,
+		'post_title' => 'Registration for ' . get_field( 'muhr_registration_first_name', $post_id ) . ' ' . get_field( 'muhr_registration_last_name', $post_id ),
+	);
+
+	remove_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 20 );
+
+	wp_update_post( $updated_post );
+
+	add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 20 );
 
 	if ( get_field( 'muhr_registration_email_address', $post_id ) ) {
 		$training_session = get_post( get_field( 'muhr_registration_training_session', $post_id ) );
