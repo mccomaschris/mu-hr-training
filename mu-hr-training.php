@@ -18,9 +18,9 @@ if ( ! class_exists( 'ACF' ) ) {
 }
 
 require WP_PLUGIN_DIR . '/mu-hr-train/vendor/autoload.php';
-use Carbon\Carbon;
 
 require plugin_dir_path( __FILE__ ) . '/acf-fields.php';
+require plugin_dir_path( __FILE__ ) . '/acf-form.php';
 require plugin_dir_path( __FILE__ ) . '/editor.php';
 require plugin_dir_path( __FILE__ ) . '/shortcodes.php';
 
@@ -234,6 +234,22 @@ function mu_hr_training_training_taxonomy_query( $query ) {
 add_action( 'pre_get_posts', 'mu_hr_training_training_taxonomy_query' );
 
 /**
+ * Load Session Template
+ *
+ * @param string $template The filename of the template for a single session.
+ * @return void
+ */
+function mu_hr_training_redirect_sessions_to_anchor_on_list( $template ) {
+	if ( is_singular( 'mu-session' ) ) {
+		global $post;
+		$url = get_term_link( get_field( 'mu_training_type', $post->ID ) ) . '#course' . $post->ID;
+		wp_safe_redirect( esc_url( $url ), 301 );
+		exit;
+	}
+}
+add_filter( 'template_redirect', 'mu_hr_training_redirect_sessions_to_anchor_on_list' );
+
+/**
  * Add 'courseid' to the acceptable URL parameters
  *
  * @param array $vars The array of acceptable URL parameters.
@@ -244,65 +260,6 @@ function mu_hr_training_query_parameter( $vars ) {
 	return $vars;
 }
 add_filter( 'query_vars', 'mu_hr_training_query_parameter' );
-
-/**
- * Remove ACF's default styling for forms.
- */
-function mu_hr_training_acf_form_deregister_styles() {
-	wp_deregister_style( 'acf-global' );
-	wp_deregister_style( 'acf-input' );
-	wp_register_style( 'acf-global', false );
-	wp_register_style( 'acf-input', false );
-
-}
-add_action( 'wp_enqueue_scripts', 'mu_hr_training_acf_form_deregister_styles' );
-
-/**
- * Register acf_form_head
- */
-function mu_hr_training_form_head() {
-	acf_form_head();
-}
-add_action( 'init', 'mu_hr_training_form_head' );
-
-/**
- * Add title and registration date to register post type
- *
- * @param integer $post_id The ID of the post.
- */
-function mu_hr_registration_submitted_registration( $post_id ) {
-	if ( 'mu-registrations' !== get_post_type( $post_id ) || is_admin() ) {
-		return;
-	}
-
-	wp_update_post(
-		array(
-			'ID'         => $post_id,
-			'post_title' => 'Registration from ' . get_field( 'muhr_registration_first_name', $post_id ) . ' ' . get_field( 'muhr_registration_last_name', $post_id ),
-			'meta_input' => array(
-				'muhr_registration_registration_date' => Carbon::now()->timezone( 'America/Detroit' ),
-			),
-		),
-	);
-
-	if ( get_field( 'muhr_registration_email_address', $post_id ) ) {
-		$training_session = get_post( get_field( 'muhr_registration_training_session', $post_id ) );
-
-		$course_name       = $training_session->post_title;
-		$course_location   = get_field( 'mu_training_training_location', $training_session->ID );
-		$course_day        = Carbon::parse( get_field( 'mu_training_start_time', $training_session->ID ) )->format( 'F j, Y' );
-		$course_start_time = Carbon::parse( get_field( 'mu_training_start_time', $training_session->ID ) )->format( 'g:i a' );
-		$course_end_time   = Carbon::parse( get_field( 'mu_training_end_time', $training_session->ID ) )->format( 'g:i a' );
-
-		$email_body  = 'You have successfully registered for ' . $course_name . ' at ' . $course_location . ' on ' . $course_day . ' at ' . $course_start_time . ' - ' . $course_end_time;
-		$email_body .= ".\r\r";
-		$email_body .= 'For any questions please contact Human Resources.';
-
-		$headers = 'From: human-resources@marshall.edu';
-		mail( get_field( 'muhr_registration_email_address', $post_id ), 'HR Training Registration', $email_body, $headers );
-	}
-}
-add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 15 );
 
 /**
  * Check if user is authenticated via CAS.
@@ -341,12 +298,11 @@ function mu_hr_registration_check_cas() {
 		phpCAS::forceAuthentication();
 
 		$admins     = get_field( 'mu_hr_administrators', 'option' );
-		$can_access = explode( ',', $admins );
+		$can_access = array_map( 'trim', explode( ',', $admins ) );
 
 		$can_access[] = get_field( 'mu_training_instructor', $training_session_id )['instructor_username'];
 		$can_access[] = get_field( 'mu_training_instructor', $training_session_id )['backup_instructor_username'];
 
-		die( '<pre>' . print_r( $can_access ) . '</pre>' );
 		if ( in_array( phpCAS::getUser(), $can_access, true ) ) {
 			return;
 		} else {
