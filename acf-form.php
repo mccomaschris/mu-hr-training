@@ -61,10 +61,6 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		return;
 	}
 
-	if ( 'new' !== $post_id ) {
-		return $post_id;
-	}
-
 	update_field( 'muhr_registration_registration_date', Carbon::now()->timezone( 'America/Detroit' ), $post_id );
 
 	$updated_post = array(
