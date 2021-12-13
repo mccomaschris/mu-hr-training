@@ -158,7 +158,7 @@ function mu_hr_registration_registration_list( $atts, $content = null ) {
 			$html .= '<td>' . get_field( 'muhr_registration_first_name', $registration->ID ) . '</td>';
 			$html .= '<td>' . get_field( 'muhr_registration_department', $registration->ID ) . '</td>';
 			$html .= '<td><a href="mailto:' . get_field( 'muhr_registration_email_address', $registration->ID ) . '">' . get_field( 'muhr_registration_email_address', $registration->ID ) . '</a></td>';
-			$html .= '<td>' . get_field( 'muhr_registration_mu_id_number', $registration->ID ) . '</td>';
+			$html .= '<td>' . get_field( 'muhr_registration_mu_id', $registration->ID ) . '</td>';
 			$html .= '</tr>';
 		}
 		$html .= '</tbody>';
