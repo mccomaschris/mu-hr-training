@@ -187,7 +187,7 @@ register_deactivation_hook( __FILE__, 'mu_hr_training_deactivate' );
  * Proper way to enqueue scripts and styles
  */
 function mu_hr_training_scripts() {
-	wp_enqueue_style( 'mu-hr-training', plugin_dir_path( __FILE__ ) . 'css/mu-hr-training.css', '', true );
+	wp_enqueue_style( 'mu-hr-training', plugin_dir_url( __FILE__ ) . 'css/mu-hr-training.css', '', true );
 }
 add_action( 'wp_enqueue_scripts', 'mu_hr_training_scripts' );
 
