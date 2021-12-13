@@ -59,7 +59,7 @@ require get_template_directory() . '/template-parts/hero/no-hero.php';
 									<?php } ?>
 									<div class="text-sm"><span class="font-semibold">Location:</span> <?php echo esc_attr( get_field( 'mu_training_training_location', get_the_ID() ) ); ?></div>
 									<div class="text-sm"><?php echo esc_attr( Carbon::parse( get_field( 'mu_training_start_time', get_the_ID() ) )->format( 'F j, g:ia' ) ); ?> - <?php echo esc_attr( Carbon::parse( get_field( 'mu_training_end_time', get_the_ID() ) )->format( 'g:ia' ) ); ?> · <span class="font-semibold"><?php echo esc_attr( $seats_left ); ?></span> spots remaining</div> <span class="hidden">Seats taken: <?php echo intval( count( $registrations ) ); ?></span>
-									<div class="text-sm"><span class="font-semibold">Instructor:</span> (<a href="<?php echo esc_url( home_url() ); ?>/training/registered-list/?courseid=<?php echo esc_attr( get_the_ID() ); ?>">Instructor Access</a>)</div>
+									<div class="text-sm"><span class="font-semibold">Instructor:</span> <?php echo esc_attr( get_field( 'mu_training_instructor', get_the_ID() )['instructor_name'] ); ?> (<a href="<?php echo esc_url( home_url() ); ?>/training/registered-list/?courseid=<?php echo esc_attr( get_the_ID() ); ?>">Instructor Access</a>)</div>
 									<?php
 									if ( get_field( 'mu_training_course_description', get_the_ID() ) ) {
 										?>

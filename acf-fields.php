@@ -419,9 +419,9 @@ if( function_exists('acf_add_local_field_group') ):
 				'placeholder' => '',
 				'prepend' => '',
 				'append' => '',
-				'min' => '',
+				'min' => 0,
 				'max' => '',
-				'step' => '',
+				'step' => 1,
 			),
 			array(
 				'key' => 'field_61ae1ef3638a6',
