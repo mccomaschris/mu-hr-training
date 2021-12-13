@@ -78,6 +78,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 				),
 				'return'             => home_url( 'training/confirmation/' ),
 				'fields'             => array(
+					'field_61b761c508b7f', // mu id number.
 					'field_61ae472969cf9', // first name.
 					'field_61ae473469cfa', // last name.
 					'field_61ae4759ee64d', // department.
