@@ -35,7 +35,7 @@ add_action( 'init', 'mu_hr_training_form_head' );
  * @param integer $post_id The ID of the post.
  */
 function mu_hr_registration_submitted_registration( $post_id ) {
-	if ( 'mu-registrations' !== get_post_type( $post_id ) || is_admin() ) {
+	if ( 'mu-registrations' !== get_post_type( $post_id ) ) {
 		return;
 	}
 
@@ -52,7 +52,7 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 
 	add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 20 );
 
-	if ( get_field( 'muhr_registration_email_address', $post_id ) ) {
+	if ( get_field( 'muhr_registration_email_address', $post_id ) && ! is_admin() ) {
 		$training_session = get_post( get_field( 'muhr_registration_training_session', $post_id ) );
 
 		$course_name       = $training_session->post_title;
