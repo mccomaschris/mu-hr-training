@@ -46,7 +46,7 @@ require get_template_directory() . '/template-parts/hero/no-hero.php';
 						<div class="border-b border-gray-100 flex flex-row items-start py-4 px-4 lg:px-6">
 							<div class="flex-col flex w-12 lg:w-16 mx-auto">
 								<div class="bg-green text-white text-xl font-bold uppercase py-1 rounded-t text-center"><?php echo esc_attr( Carbon::parse( get_field( 'mu_training_start_time', get_the_ID() ) )->format( 'M' ) ); ?></div>
-								<div class="bg-gray-100 text-sm lg:text-base font-bold uppercase py-1 rounded-b text-center"><?php echo esc_attr( Carbon::parse( get_field( 'mu_training_start_time', get_the_ID() ) )->format( 'j' ) ); ?></div>
+								<div class="bg-gray-100 text-sm lg:text-xl font-bold uppercase py-1 rounded-b text-center"><?php echo esc_attr( Carbon::parse( get_field( 'mu_training_start_time', get_the_ID() ) )->format( 'j' ) ); ?></div>
 							</div>
 							<div class="ml-4 lg:ml-6 flex-1">
 								<div class="">
