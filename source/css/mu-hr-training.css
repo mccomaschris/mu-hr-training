@@ -5,3 +5,23 @@
 .acf-error-message {
 	@apply font-bold text-red-500;
 }
+
+#new-registration .acf-field {
+	@apply text-center;
+}
+
+.acf-fields.acf-form-fields {
+	@apply flex flex-wrap;
+}
+
+.acf-input-wrap {
+	@apply px-4;
+}
+
+.acf-input-wrap input {
+	@apply w-full;
+}
+
+.acf-form-submit {
+	@apply mt-6 text-center;
+}
