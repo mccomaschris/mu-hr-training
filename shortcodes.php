@@ -149,6 +149,9 @@ function mu_hr_registration_registration_list( $atts, $content = null ) {
 		$html .= '<th>Department</th>';
 		$html .= '<th>Email Address</th>';
 		$html .= '<th>MU ID Number</th>';
+		if ( current_user_can( 'manage_options' ) ) {
+			$html .= '<th>Edit</th>';
+		}
 		$html .= '</tr>';
 		$html .= '</thead>';
 		$html .= '<tbody>';
@@ -159,6 +162,9 @@ function mu_hr_registration_registration_list( $atts, $content = null ) {
 			$html .= '<td>' . get_field( 'muhr_registration_department', $registration->ID ) . '</td>';
 			$html .= '<td><a href="mailto:' . get_field( 'muhr_registration_email_address', $registration->ID ) . '">' . get_field( 'muhr_registration_email_address', $registration->ID ) . '</a></td>';
 			$html .= '<td>' . get_field( 'muhr_registration_mu_id', $registration->ID ) . '</td>';
+			if ( current_user_can( 'manage_options' ) ) {
+				$html .= '<td><a href="' . esc_url( home_url() ) . '/wp-admin/post.php?post=' . esc_attr( $registration->ID ) . '&action=edit">Edit this Registration</a></td>';
+			}
 			$html .= '</tr>';
 		}
 		$html .= '</tbody>';
@@ -229,7 +235,7 @@ function mu_hr_registration_individual_session( $atts, $content = null ) {
 	$output .= '<span class="font-semibold">' . esc_attr( $training_session->post_title ) . '</span>';
 	$output .= '<div class="text-sm"><span class="font-semibold">Location:</span> ' . esc_attr( get_field( 'mu_training_training_location', $training_session->ID ) ) . '</div>';
 	$output .= '<div class="text-sm">' . esc_attr( Carbon::parse( get_field( 'mu_training_start_time', $training_session->ID ) )->format( 'F j, g:ia' ) ) . ' - ' . esc_attr( Carbon::parse( get_field( 'mu_training_end_time', $training_session->ID ) )->format( 'g:ia' ) ) . ' · <span class="font-semibold">' . esc_attr( $seats_left ) . '</span> spots remaining</div> <span class="hidden">Seats taken: ' . intval( count( $registrations ) ) . '</span>';
-	$output .= '<div class="text-sm"><span class="font-semibold">Instructor:</span> Katherine Hetzer (<a href="https://www.marshall.edu/human-resources/training/registered-list/?courseid=' . esc_attr( $training_session->ID ) . '">Instructor Access</a>)</div>';
+	$output .= '<div class="text-sm"><span class="font-semibold">Instructor:</span> Katherine Hetzer (<a href="' . esc_url( home_url() ) . '/training/registered-list/?courseid=' . esc_attr( $training_session->ID ) . '">Instructor Access</a>)</div>';
 
 	$training = get_term( get_field( 'mu_training_type', $training_session->ID ), 'mu-training' );
 
@@ -243,7 +249,7 @@ function mu_hr_registration_individual_session( $atts, $content = null ) {
 
 	if ( $data['show_register_button'] ) {
 		$output .= '<div class="mt-6">';
-		$output .= '<a href="https://www.marshall.edu/human-resources/training/registration/?courseid=' . esc_attr( $training_session ) . '" class="btn btn-green">Register</a>';
+		$output .= '<a href="' . esc_url( home_url() ) . '/training/registration/?courseid=' . esc_attr( $training_session ) . '" class="btn btn-green">Register</a>';
 		$output .= '</div>';
 	}
 
