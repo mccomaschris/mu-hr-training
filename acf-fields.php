@@ -248,7 +248,7 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'taxonomy' => 'mu-training',
-				'field_type' => 'radio',
+				'field_type' => 'select',
 				'allow_null' => 0,
 				'add_term' => 1,
 				'save_terms' => 0,
