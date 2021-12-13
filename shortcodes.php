@@ -76,7 +76,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 					'post_type'   => 'mu-registrations',
 					'post_status' => 'publish',
 				),
-				'return'             => home_url( 'training/confirmation' ),
+				'return'             => home_url( 'training/confirmation/' ),
 				'fields'             => array(
 					'field_61ae472969cf9', // first name.
 					'field_61ae473469cfa', // last name.
