@@ -28,6 +28,30 @@ function mu_hr_training_form_head() {
 add_action( 'init', 'mu_hr_training_form_head' );
 
 /**
+ * Update the title before the post is saved.
+ *
+ * @param array $data The array of post data.
+ * @return array
+ */
+function mu_hr_registration_update_title( $data ) {
+	if ( 'mu-registrations' !== $data['post_type'] || is_admin() ) {
+		return;
+	}
+
+	if ( wp_verify_nonce( '_acf_nonce' ) ) {
+		if ( isset( $_POST['acf']['field_61ae472969cf9'] ) && isset( $_POST['acf']['field_61ae473469cfa'] ) ) {
+			$first_name = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
+			$last_name  = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
+
+			$data['post_title'] = 'Registration from ' . $first_name . ' ' . get_field( 'muhr_registration_last_name', $last_name );
+		}
+	}
+
+	return $data;
+
+}
+add_filter( 'wp_insert_post_data', 'mu_hr_registration_update_title', '99', 1 );
+/**
  * Add title and registration date to register post type
  *
  * @param integer $post_id The ID of the post.
@@ -37,15 +61,7 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		return;
 	}
 
-	wp_update_post(
-		array(
-			'ID'         => $post_id,
-			'post_title' => 'Registration from ' . get_field( 'muhr_registration_first_name', $post_id ) . ' ' . get_field( 'muhr_registration_last_name', $post_id ),
-			'meta_input' => array(
-				'muhr_registration_registration_date' => Carbon::now()->timezone( 'America/Detroit' ),
-			),
-		),
-	);
+	update_field( 'muhr_registration_registration_date', Carbon::now()->timezone( 'America/Detroit' ), $post_id );
 
 	if ( get_field( 'muhr_registration_email_address', $post_id ) ) {
 		$training_session = get_post( get_field( 'muhr_registration_training_session', $post_id ) );
@@ -64,4 +80,4 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		// mail( get_field( 'muhr_registration_email_address', $post_id ), 'HR Training Registration', $email_body, $headers );
 	}
 }
-add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 15 );
+add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 20 );
