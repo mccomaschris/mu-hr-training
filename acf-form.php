@@ -38,17 +38,14 @@ function mu_hr_registration_update_title( $data ) {
 		return;
 	}
 
-	if ( ! wp_verify_nonce( '_acf_nonce' ) ) {
-		if ( isset( $_POST['acf']['field_61ae472969cf9'] ) && isset( $_POST['acf']['field_61ae473469cfa'] ) ) {
-			$first_name = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
-			$last_name  = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
+	if ( isset( $_POST['acf']['field_61ae472969cf9'] ) && isset( $_POST['acf']['field_61ae473469cfa'] ) ) {
+		$first_name = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
+		$last_name  = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae473469cfa'] ) );
 
-			$data['post_title'] = 'Registration from ' . $first_name . ' ' . get_field( 'muhr_registration_last_name', $last_name );
-		}
+		$data['post_title'] = 'Registration from ' . $first_name . ' ' . $last_name;
 	}
 
 	return $data;
-
 }
 add_filter( 'wp_insert_post_data', 'mu_hr_registration_update_title', '99', 1 );
 /**
