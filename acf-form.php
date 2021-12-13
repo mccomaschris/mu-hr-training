@@ -38,8 +38,8 @@ function mu_hr_registration_update_title( $data ) {
 		return;
 	}
 
-	die('here');
 	if ( wp_verify_nonce( '_acf_nonce' ) ) {
+		die('here');
 		if ( isset( $_POST['acf']['field_61ae472969cf9'] ) && isset( $_POST['acf']['field_61ae473469cfa'] ) ) {
 			$first_name = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
 			$last_name  = sanitize_text_field( wp_unslash( $_POST['acf']['field_61ae472969cf9'] ) );
