@@ -1,0 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.acf-notice -error acf-error-message {
+	@apply bg-red-100 border border-red-500 text-red-900 px-3 py-2 text-sm;
+}
