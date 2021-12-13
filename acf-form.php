@@ -47,7 +47,7 @@ function mu_hr_registration_update_title( $data ) {
 
 	return $data;
 }
-add_filter( 'wp_insert_post_data', 'mu_hr_registration_update_title', '99', 1 );
+// add_filter( 'wp_insert_post_data', 'mu_hr_registration_update_title', '99', 1 );
 /**
  * Add title and registration date to register post type
  *
