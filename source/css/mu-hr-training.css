@@ -3,5 +3,5 @@
 @import "tailwindcss/utilities";
 
 .acf-error-message {
-	@apply bg-red-100 border border-red-500 text-red-900 px-3 py-2 text-sm;
+	@apply font-bold text-red-900;
 }
