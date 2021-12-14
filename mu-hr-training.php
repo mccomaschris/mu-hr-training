@@ -10,7 +10,7 @@
  * Plugin URI: https://www.marshall.edu
  * Description: Plugin to allow MU Human Resources to list trainings and allow individuals to register for training.
  * Version: 1.0
- * Author: Marshall University
+ * Author: Christopher McComas
  */
 
 if ( ! class_exists( 'ACF' ) ) {
@@ -234,12 +234,11 @@ function mu_hr_training_training_taxonomy_query( $query ) {
 add_action( 'pre_get_posts', 'mu_hr_training_training_taxonomy_query' );
 
 /**
- * Load Session Template
+ * Redirect requests for individual sessions to the parent taxonomy.
  *
- * @param string $template The filename of the template for a single session.
  * @return void
  */
-function mu_hr_training_redirect_sessions_to_anchor_on_list( $template ) {
+function mu_hr_training_redirect_sessions_to_anchor_on_list() {
 	if ( is_singular( 'mu-session' ) ) {
 		global $post;
 		$url = get_term_link( get_field( 'mu_training_type', $post->ID ) ) . '#course' . $post->ID;
@@ -248,6 +247,19 @@ function mu_hr_training_redirect_sessions_to_anchor_on_list( $template ) {
 	}
 }
 add_filter( 'template_redirect', 'mu_hr_training_redirect_sessions_to_anchor_on_list' );
+
+/**
+ * Redirect requests for individual registrations to homepage.
+ *
+ * @return void
+ */
+function mu_hr_training_redirect_registrations_to_homepage() {
+	if ( is_singular( 'mu-registrations' ) ) {
+		wp_safe_redirect( esc_url( home_url() ), 301 );
+		exit;
+	}
+}
+add_filter( 'template_redirect', 'mu_hr_training_redirect_registrations_to_homepage' );
 
 /**
  * Add 'courseid' to the acceptable URL parameters
