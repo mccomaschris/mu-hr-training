@@ -131,3 +131,17 @@ function mu_hr_training_registrations_custom_columns_data( $column, $post_id ) {
 	}
 }
 add_action( 'manage_mu-registrations_posts_custom_column', 'mu_hr_training_registrations_custom_columns_data', 10, 2 );
+
+/**
+ * Remove View link on Dashboard for Registrations.
+ *
+ * @param array $actions The array of actions on the post row.
+ * @return array
+ */
+function mu_hr_training_remove_view_action( $actions ) {
+	if ( 'mu-registrations' === get_post_type() ) {
+		unset( $actions['view'] );
+	}
+	return $actions;
+}
+add_filter( 'post_row_actions', 'mu_hr_training_remove_view_action', 10, 1 );
