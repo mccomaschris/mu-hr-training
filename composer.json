@@ -1,4 +1,7 @@
 {
+	"name": "marshallu/mu-hr-train",
+	"description": "Plugin that allows for HR trainings to be created and individuals register for sessions on the Marshall website.",
+	"type": "wordpress-plugin",
     "require": {
         "paulthewalton/acf-stubs": "^5.8",
         "paulthewalton/acf-pro-stubs": "5.8.9.1",
