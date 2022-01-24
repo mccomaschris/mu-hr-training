@@ -126,6 +126,7 @@ function mu_hr_training_registration_post_type() {
 		'show_in_rest'        => true,
 		'exclude_from_search' => false,
 		'menu_icon'           => 'dashicons-clipboard',
+		'menu_position'       => 58,
 	);
 
 	register_post_type( 'mu-registrations', $args );
