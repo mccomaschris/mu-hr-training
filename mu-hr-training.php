@@ -72,6 +72,7 @@ function mu_hr_training_session_post_type() {
 		'show_in_rest'        => true,
 		'exclude_from_search' => false,
 		'menu_icon'           => 'dashicons-awards',
+		'menu_position'       => 57,
 	);
 
 	register_post_type( 'mu-session', $args );
