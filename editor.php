@@ -145,3 +145,13 @@ function mu_hr_training_remove_view_action( $actions ) {
 	return $actions;
 }
 add_filter( 'post_row_actions', 'mu_hr_training_remove_view_action', 10, 1 );
+
+
+function my_acf_fields_relationship_result( $text, $post, $field, $post_id ) {
+	// $page_views = get_field( 'page_views', $post->ID );
+	// if ( $page_views ) {
+		// $text .= ' ' . sprintf( '(%s views)', $page_views );
+	// }
+	return $text . ' asdf ';
+}
+add_filter( 'acf/fields/relationship/result', 'my_acf_fields_relationship_result', 10, 4 );
