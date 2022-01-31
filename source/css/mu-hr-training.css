@@ -22,13 +22,7 @@
 	@apply flex flex-col items-center;
 }
 
-.acf-input-wrap {
-	@apply px-4;
-}
 
-.acf-input-wrap input {
-	@apply w-full;
-}
 
 .acf-form-submit {
 	@apply mt-6 text-center;
@@ -40,5 +34,13 @@
 	}
 	#new-registration .acf-field .acf-input {
 		@apply flex-1 ml-4;
+	}
+
+	.acf-input-wrap {
+		@apply px-4;
+	}
+
+	.acf-input-wrap input {
+		@apply w-full;
 	}
 }
