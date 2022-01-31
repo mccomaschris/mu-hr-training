@@ -11,7 +11,7 @@
 }
 
 .acf-fields.acf-form-fields {
-	@apply flex flex-wrap;
+	@apply flex flex-col items-center;
 }
 
 .acf-input-wrap {
@@ -24,8 +24,4 @@
 
 .acf-form-submit {
 	@apply mt-6 text-center;
-}
-
-.new-registration .acf-fields {
-	@apply flex flex-col mx-auto items-center;
 }

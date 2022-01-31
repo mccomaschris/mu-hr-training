@@ -82,7 +82,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'w-full lg:w-1/2 mx-auto',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -101,7 +101,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'w-full lg:w-1/2 mx-auto',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -120,7 +120,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'w-full lg:w-1/2 mx-auto',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -139,7 +139,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'w-full lg:w-1/2 mx-auto',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -157,7 +157,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'w-full lg:w-1/2 mx-auto',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -176,7 +176,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'w-full lg:w-1/2 mx-auto',
 					'id' => '',
 				),
 				'default_value' => '',
