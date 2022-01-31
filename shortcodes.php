@@ -224,7 +224,8 @@ function mu_hr_registration_individual_session( $atts, $content = null ) {
 
 	wp_reset_postdata();
 
-	$output  = '<div id="course' . esc_attr( $training_session->ID ) . '" class="flex flex-col border-gray-100 border rounded my-6">';
+	$output  = '<div id="course' . esc_attr( $training_session->ID ) . '"  class="block">';
+	$output .= '<div class="flex flex-col border-gray-100 border rounded my-6">';
 	$output .= '<div class="border-b border-gray-100 flex flex-row items-start py-4 px-4 lg:px-6">';
 
 	$output .= '<div class="flex-col flex w-12 lg:w-16 mx-auto">';
@@ -255,6 +256,7 @@ function mu_hr_registration_individual_session( $atts, $content = null ) {
 		$output .= '</div>';
 	}
 
+	$output .= '</div>';
 	$output .= '</div>';
 	$output .= '</div>';
 	$output .= '</div>';
