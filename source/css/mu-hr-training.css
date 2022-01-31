@@ -7,7 +7,15 @@
 }
 
 #new-registration .acf-field {
-	@apply text-center;
+	@apply flex;
+}
+
+#new-registration .acf-field .acf-label {
+	@apply w-1/4;
+}
+
+#new-registration .acf-field .acf-input {
+	@apply flex-1 ml-4;
 }
 
 .acf-fields.acf-form-fields {
