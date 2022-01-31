@@ -24,6 +24,8 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 		$atts
 	);
 
+	wp_enqueue_style( 'marsha-forms', get_theme_file_uri( 'css/marsha-forms.css' ), '', null, 'all' ); // phpcs:ignore
+
 	$html = '';
 
 	if ( ! get_query_var( 'courseid' ) ) {
