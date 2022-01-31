@@ -25,3 +25,7 @@
 .acf-form-submit {
 	@apply mt-6 text-center;
 }
+
+.new-registration .acf-fields {
+	@apply flex flex-col mx-auto items-center;
+}
