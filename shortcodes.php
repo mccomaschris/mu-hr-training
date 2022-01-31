@@ -89,7 +89,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 				),
 				'submit_value'       => 'Register',
 				'html_after_fields'  => '<input type="hidden" name="acf[field_61ae470969cf8]" value="' . esc_attr( get_query_var( 'courseid' ) ) . '" />',
-				'html_before_fields' => '<div class="w-full">' . do_shortcode( '[mu-hr-session-individual class="pb-12"]' ) . '</div>',
+				'html_before_fields' => '<div class="w-full lg:max-w-2xl">' . do_shortcode( '[mu-hr-session-individual class="pb-12"]' ) . '</div>',
 			)
 		);
 	}
