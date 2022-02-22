@@ -7,7 +7,7 @@
 }
 
 #new-registration .acf-field {
-	@apply flex flex-wrap w-full;
+	@apply grid gap-4 grid-cols-1 w-full;
 }
 
 #new-registration .acf-field .acf-label {
@@ -27,11 +27,15 @@
 }
 
 @screen lg {
+	#new-registration .acf-field {
+		@apply grid gap-4 grid-cols-2 w-full;
+	}
+
 	#new-registration .acf-field .acf-label {
 		@apply w-1/4;
 	}
 	#new-registration .acf-field .acf-input {
-		@apply flex-1 ml-4;
+		@apply ml-4;
 	}
 
 	.acf-input-wrap {
