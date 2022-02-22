@@ -7,7 +7,7 @@
 }
 
 #new-registration .acf-field {
-	@apply flex flex-wrap;
+	@apply flex flex-wrap w-full;
 }
 
 #new-registration .acf-field .acf-label {
@@ -21,8 +21,6 @@
 .acf-fields.acf-form-fields {
 	@apply flex flex-col items-center;
 }
-
-
 
 .acf-form-submit {
 	@apply mt-6 text-center;

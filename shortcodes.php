@@ -35,12 +35,36 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 		$training_session = get_post( get_query_var( 'courseid' ) );
 		$seats_total      = get_post_meta( get_query_var( 'courseid' ), 'mu_training_training_seats', true );
 
+		if ( get_field( 'mu_training_benefits_training', $training_session->ID ) ) {
+			$fields = array(
+				'field_620fb36179601', // first name
+				'field_620fb8bd54fb8', // last name
+				'field_620fb36e79602', // preferred name
+				'field_620fb3822d9a5', // date of birth
+				'field_620fb39482d12', // email address
+				'field_620fb3a7dc992', // position title
+				'field_620fb3b5f9c95', // annual salary
+				'field_620fb3d67f534', // 9 month faculty
+				'field_620fb4007f535', // date of hire
+				'field_620fb40d7f536', // person completing request
+			);
+		} else {
+			$fields = array(
+				'field_61ae472969cf9', // first name.
+				'field_61ae473469cfa', // last name.
+				'field_61b761c508b7f', // mu id number.
+				'field_61ae4759ee64d', // department.
+				'field_61ae473a69cfb', // email address.
+				'field_61ae474469cfc', // phone number.
+			);
+		}
+
 		$registrations = get_posts(
 			array(
 				'numberposts' => -1,
 				'post_type'   => 'mu-registrations',
-				'meta_key'    => 'muhr_registration_training_session',
-				'meta_value'  => get_query_var( 'courseid' ),
+				'meta_key'    => 'muhr_registration_training_session', // phpcs:ignore
+				'meta_value'  => get_query_var( 'courseid' ), // phpcs:ignore
 			)
 		);
 
@@ -49,14 +73,6 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 		if ( intval( count( $registrations ) ) >= intval( $seats_total ) ) {
 			return 'Sorry registration for this training is full.';
 		}
-
-		$fields = array(
-			'field_61ae472969cf9', // first name.
-			'field_61ae473469cfa', // last name.
-			'field_61ae4759ee64d', // department.
-			'field_61ae473a69cfb', // email address.
-			'field_61ae474469cfc', // phone number.
-		);
 
 		$training_info = 'Registering for ' . esc_attr( $training_session->post_title );
 
@@ -79,14 +95,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 					'post_status' => 'publish',
 				),
 				'return'             => home_url( 'training/confirmation/' ),
-				'fields'             => array(
-					'field_61ae472969cf9', // first name.
-					'field_61ae473469cfa', // last name.
-					'field_61b761c508b7f', // mu id number.
-					'field_61ae4759ee64d', // department.
-					'field_61ae473a69cfb', // email address.
-					'field_61ae474469cfc', // phone number.
-				),
+				'fields'             => $fields,
 				'submit_value'       => 'Register',
 				'html_after_fields'  => '<input type="hidden" name="acf[field_61ae470969cf8]" value="' . esc_attr( get_query_var( 'courseid' ) ) . '" />',
 				'html_before_fields' => '<div class="w-full">' . do_shortcode( '[mu-hr-session-individual class="pb-12"]' ) . '</div>',
