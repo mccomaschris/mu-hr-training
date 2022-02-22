@@ -35,9 +35,6 @@
 		@apply grid gap-4 grid-cols-2 w-full;
 	}
 
-	#new-registration .acf-field .acf-label {
-		@apply w-1/4;
-	}
 	#new-registration .acf-field .acf-input {
 		@apply ml-4;
 	}
