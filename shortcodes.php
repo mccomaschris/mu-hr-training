@@ -247,7 +247,7 @@ function mu_hr_registration_individual_session( $atts, $content = null ) {
 	$output .= '<span class="font-semibold">' . esc_attr( $training_session->post_title ) . '</span>';
 	$output .= '<div class="text-sm"><span class="font-semibold">Location:</span> ' . esc_attr( get_field( 'mu_training_training_location', $training_session->ID ) ) . '</div>';
 	$output .= '<div class="text-sm">' . esc_attr( Carbon::parse( get_field( 'mu_training_start_time', $training_session->ID ) )->format( 'F j, g:ia' ) ) . ' - ' . esc_attr( Carbon::parse( get_field( 'mu_training_end_time', $training_session->ID ) )->format( 'g:ia' ) ) . ' · <span class="font-semibold">' . esc_attr( $seats_left ) . '</span> spots remaining</div> <span class="hidden">Seats taken: ' . intval( count( $registrations ) ) . '</span>';
-	$output .= '<div class="text-sm"><span class="font-semibold">Instructor:</span> ' . esc_attr( get_field( 'mu_training_instructor' ) ) . ' (<a href="' . esc_url( home_url() ) . '/training/registered-list/?courseid=' . esc_attr( $training_session->ID ) . '">Instructor Access</a>)</div>';
+	$output .= '<div class="text-sm"><span class="font-semibold">Instructor:</span> ' . esc_attr( get_field( 'mu_training_instructor', $training_session->ID ) ) . ' (<a href="' . esc_url( home_url() ) . '/training/registered-list/?courseid=' . esc_attr( $training_session->ID ) . '">Instructor Access</a>)</div>';
 
 	$training = get_term( get_field( 'mu_training_type', $training_session->ID ), 'mu-training' );
 
