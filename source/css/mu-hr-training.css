@@ -27,6 +27,10 @@
 }
 
 @screen lg {
+	.acf-fields .acf-form-fields {
+		@apply w-3/4 mx-auto;
+	}
+
 	#new-registration .acf-field {
 		@apply grid gap-4 grid-cols-2 w-full;
 	}
