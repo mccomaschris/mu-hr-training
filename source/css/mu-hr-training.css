@@ -19,7 +19,7 @@
 }
 
 .acf-fields.acf-form-fields {
-	@apply flex flex-col items-center;
+	@apply flex flex-col items-center w-full;
 }
 
 .acf-form-submit {
@@ -27,7 +27,7 @@
 }
 
 @screen lg {
-	.acf-fields .acf-form-fields {
+	.acf-fields.acf-form-fields {
 		@apply w-3/4 mx-auto;
 	}
 
