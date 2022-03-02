@@ -37,16 +37,16 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 
 		if ( get_field( 'mu_training_benefits_training', $training_session->ID ) ) {
 			$fields = array(
-				'field_620fb36179601', // first name
-				'field_620fb8bd54fb8', // last name
-				'field_620fb36e79602', // preferred name
-				'field_620fb3822d9a5', // date of birth
-				'field_620fb39482d12', // email address
-				'field_620fb3a7dc992', // position title
-				'field_620fb3b5f9c95', // annual salary
-				'field_620fb3d67f534', // 9 month faculty
-				'field_620fb4007f535', // date of hire
-				'field_620fb40d7f536', // person completing request
+				'field_620fb36179601', // first name.
+				'field_620fb8bd54fb8', // last name.
+				'field_620fb36e79602', // preferred name.
+				'field_620fb3822d9a5', // date of birth.
+				'field_620fb39482d12', // email address.
+				'field_620fb3a7dc992', // position title.
+				'field_620fb3b5f9c95', // annual salary.
+				'field_620fb3d67f534', // 9 month faculty.
+				'field_620fb4007f535', // date of hire.
+				'field_620fb40d7f536', // person completing request.
 			);
 		} else {
 			$fields = array(
@@ -86,6 +86,12 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 
 		$training_info .= '.';
 
+		if ( get_field( 'mu_training_benefits_training', $training_session->ID ) && get_field( 'benefits_session_confirmation_url', 'option' ) ) {
+			$redirect_url = get_field( 'benefits_session_confirmation_url', 'option' );
+		} else {
+			$redirect_url = 'training/confirmation';
+		}
+
 		acf_form(
 			array(
 				'id'                 => 'new-registration',
@@ -94,7 +100,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 					'post_type'   => 'mu-registrations',
 					'post_status' => 'publish',
 				),
-				'return'             => home_url( 'training/confirmation/' ),
+				'return'             => home_url( $redirect_url ),
 				'fields'             => $fields,
 				'submit_value'       => 'Register',
 				'html_after_fields'  => '<input type="hidden" name="acf[field_61ae470969cf8]" value="' . esc_attr( get_query_var( 'courseid' ) ) . '" />',
