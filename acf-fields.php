@@ -312,6 +312,25 @@ if( function_exists('acf_add_local_field_group') ):
 				'append' => '',
 				'maxlength' => '',
 			),
+			array(
+				'key' => 'field_621fa9bd3945c',
+				'label' => 'Benefits Session Confirmation URL',
+				'name' => 'benefits_session_confirmation_url',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
 		),
 		'location' => array(
 			array(
