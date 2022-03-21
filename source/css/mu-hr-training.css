@@ -51,3 +51,7 @@
 #new-registration .acf-field.acf-hidden {
 	display: none !important;
 }
+
+hidden {
+	display: none !important;
+}
