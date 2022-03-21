@@ -48,6 +48,6 @@
 	}
 }
 
-.acf-hidden {
+#new-registration .acf-field.acf-hidden {
 	display: none !important;
 }
