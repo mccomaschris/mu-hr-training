@@ -40,7 +40,7 @@
 	}
 
 	.acf-input-wrap {
-		@apply px-4;
+		/* @apply px-4; */
 	}
 
 	.acf-input-wrap input {
