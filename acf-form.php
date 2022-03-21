@@ -65,8 +65,9 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		$email_body .= ".\r\r";
 		$email_body .= 'For any questions please contact Human Resources.';
 
-		$headers = 'From: human-resources@marshall.edu';
-		mail( get_field( 'muhr_registration_email_address', $post_id ), 'HR Training Registration', $email_body, $headers );
+		$headers[] = 'From: human-resources@marshall.edu';
+		$headers[] = 'Cc: ' . get_field( 'muhr_registration_request_email', $post_id ) . ',' . get_field( 'muhr_registration_supervisor_email', $post_id );
+		mail( get_field( 'muhr_registration_email_address', $post_id ), 'HR Training Registration', $email_body, implode( "\r\n", $headers ) );
 	}
 }
 add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 20 );

@@ -37,6 +37,7 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 
 		if ( get_field( 'mu_training_benefits_training', $training_session->ID ) ) {
 			$fields = array(
+				'field_6238945e8405d', // faculty of staff?
 				'field_620fb36179601', // first name.
 				'field_620fb8bd54fb8', // last name.
 				'field_620fb36e79602', // preferred name.
@@ -44,9 +45,14 @@ function mu_hr_registration_register_shortcode( $atts, $content = null ) {
 				'field_620fb39482d12', // email address.
 				'field_620fb3a7dc992', // position title.
 				'field_620fb3b5f9c95', // annual salary.
-				'field_620fb3d67f534', // 9 month faculty.
 				'field_620fb4007f535', // date of hire.
-				'field_620fb40d7f536', // person completing request.
+				'field_623894d02453b', // 9 month faculty.
+				'field_623894e9ba43b', // how paid?
+				'field_6238953e6e111', // transferring?
+				'field_6238954f6e112', // what agency?
+				'field_620fb40d7f536', // person completing request name.
+				'field_6238957c2d6b1', // person completing request email.
+				'field_6238959d2d6b2', // supervisor email.
 			);
 		} else {
 			$fields = array(
