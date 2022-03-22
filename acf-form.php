@@ -98,6 +98,10 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		$email_body .= '</style>';
 		$email_body .= '<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateColumns">';
 		$email_body .= '<tr>';
+		$email_body .= '<td style="font-weight: 600; border: 1px solid #999; border-right: 0px; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">Faculty/Staff</td>';
+		$email_body .= '<td style="border: 1px solid #999; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_faculty_staff', $post_id ) ) . ' ' . esc_attr( get_field( 'muhr_registration_last_name', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
 		$email_body .= '<td style="font-weight: 600; border: 1px solid #999; border-right: 0px; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">Name</td>';
 		$email_body .= '<td style="border: 1px solid #999; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_first_name', $post_id ) ) . ' ' . esc_attr( get_field( 'muhr_registration_last_name', $post_id ) ) . '</td>';
 		$email_body .= '</tr>';
@@ -126,8 +130,13 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		$email_body .= '<td style="border: 1px solid #999; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_nine_month', $post_id ) ) . '</td>';
 		$email_body .= '</tr>';
 		$email_body .= '<tr>';
+
+		$paid       = get_field_object( 'muhr_registration_paid' );
+		$paid_value = $paid['value'];
+		$paid_label = $paid['choices'][ $paid_value ];
+
 		$email_body .= '<td style="font-weight: 600; border: 1px solid #999; border-right: 0px; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">How Are You Paid?</td>';
-		$email_body .= '<td style="border: 1px solid #999; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_paid', $post_id )['choices'][ $value ] ) . '</td>';
+		$email_body .= '<td style="border: 1px solid #999; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">' . esc_attr( $paid_label ) . '</td>';
 		$email_body .= '</tr>';
 		$email_body .= '<tr>';
 		$email_body .= '<td style="font-weight: 600; border: 1px solid #999; border-right: 0px; line-height: 125%; padding: 10px 10px;" valign="top" width="50%">Are you transferring from another state agency that has PEIA?</td>';
