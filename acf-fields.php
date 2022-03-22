@@ -42,12 +42,11 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'choices' => array(
-					'\'\'' => 'Please select',
 					'faculty' => 'Faculty',
 					'staff' => 'Staff',
 				),
 				'default_value' => false,
-				'allow_null' => 0,
+				'allow_null' => 1,
 				'multiple' => 0,
 				'ui' => 0,
 				'return_format' => 'value',
