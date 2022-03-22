@@ -65,9 +65,99 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		$email_body .= ".\r\r";
 		$email_body .= 'For any questions please contact Human Resources.';
 
-		$headers[] = 'From: human-resources@marshall.edu';
-		$headers[] = 'Cc: ' . get_field( 'muhr_registration_request_email', $post_id ) . ',' . get_field( 'muhr_registration_supervisor_email', $post_id );
-		mail( get_field( 'muhr_registration_email_address', $post_id ), 'HR Training Registration', $email_body, implode( "\r\n", $headers ) );
+		$headers = 'From: human-resources@marshall.edu';
+		mail( get_field( 'muhr_registration_email_address', $post_id ), 'HR Training Registration', $email_body, $headers );
+	}
+
+	if ( get_field( 'muhr_registration_request_email', $post_id ) && get_field( 'muhr_registration_supervisor_email', $post_id ) ) {
+
+		$email_body  = '';
+		$email_body .= '<style type="text/css">';
+		$email_body .= '@media only screen and (max-width: 480px){';
+		$email_body .= '#templateColumns{';
+		$email_body .= 'width:100% !important;';
+		$email_body .= '}';
+		$email_body .= '.templateColumnContainer{';
+		$email_body .= 'display:block !important;';
+		$email_body .= 'width:100% !important;';
+		$email_body .= '}';
+		$email_body .= '.columnImage{';
+		$email_body .= 'height:auto !important;';
+		$email_body .= 'max-width:480px !important;';
+		$email_body .= 'width:100% !important;';
+		$email_body .= '}';
+		$email_body .= '.leftColumnContent{';
+		$email_body .= 'font-size:16px !important;';
+		$email_body .= 'line-height:125% !important;';
+		$email_body .= '}';
+		$email_body .= '.rightColumnContent{';
+		$email_body .= 'font-size:16px !important;';
+		$email_body .= 'line-height:125% !important;';
+		$email_body .= '}';
+		$email_body .= '}';
+		$email_body .= '</style>';
+		$email_body .= '<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateColumns">';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Name</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_first_name', $post_id ) ) . ' ' . esc_attr( get_field( 'muhr_registration_last_name', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Date of Birth</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_birthdate', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Email Address</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_email_address', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Title</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_title', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Annual Salary</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_salary', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Hire Date</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_hiredate', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">9 Month Faculty</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_nine_month', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">How Are You Paid?</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_paid', $post_id )['choices'][ $value ] ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Are you transferring from another state agency that has PEIA?</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_transfer', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		if ( get_field( 'muhr_registration_previous_agency', $post_id ) ) {
+			$email_body .= '<tr>';
+			$email_body .= '<td align="center" valign="top" width="50%">Are you transferring from another state agency that has PEIA?</td>';
+			$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_previous_agency', $post_id ) ) . '</td>';
+			$email_body .= '</tr>';
+		}
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Name of Person Completing Request</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_request_name', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Email of Person Completing Request</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_request_email', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '<tr>';
+		$email_body .= '<td align="center" valign="top" width="50%">Supervisor Email</td>';
+		$email_body .= '<td align="center" valign="top" width="50%">' . esc_attr( get_field( 'muhr_registration_supervisor_email', $post_id ) ) . '</td>';
+		$email_body .= '</tr>';
+		$email_body .= '</table>';
+
+		// $to      = get_field( 'muhr_registration_request_email', $post_id ) . ',' . get_field( 'muhr_registration_supervisor_email', $post_id );
+		$to      = 'cmccomas@marshall.edu';
+		$headers = 'From: human-resources@marshall.edu';
+
+		mail( $to, 'HR Benefits Registration', $email_body, $headers );
 	}
 }
 add_action( 'acf/save_post', 'mu_hr_registration_submitted_registration', 20 );
