@@ -34,7 +34,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'name' => 'muhr_registration_faculty_staff',
 				'type' => 'select',
 				'instructions' => '',
-				'required' => 0,
+				'required' => 1,
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
@@ -42,6 +42,7 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'choices' => array(
+					': Please select' => ': Please select',
 					'faculty' => 'Faculty',
 					'staff' => 'Staff',
 				),
