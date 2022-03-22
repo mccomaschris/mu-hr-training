@@ -154,8 +154,9 @@ function mu_hr_registration_submitted_registration( $post_id ) {
 		$email_body .= '</table>';
 
 		// $to      = get_field( 'muhr_registration_request_email', $post_id ) . ',' . get_field( 'muhr_registration_supervisor_email', $post_id );
-		$to      = 'cmccomas@marshall.edu';
-		$headers = 'From: human-resources@marshall.edu';
+		$to       = 'cmccomas@marshall.edu';
+		$headers  = "From: human-resources@marshall.edu\r\n";
+		$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
 		mail( $to, 'HR Benefits Registration', $email_body, $headers );
 	}
