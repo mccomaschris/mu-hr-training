@@ -281,7 +281,6 @@ add_filter( 'query_vars', 'mu_hr_training_query_parameter' );
  */
 function mu_hr_registration_check_cas() {
 	if ( is_page( 'registered-list' ) ) {
-
 		if ( ! get_query_var( 'courseid' ) ) {
 			return 'Sorry that course was not found.';
 		} else {
@@ -290,24 +289,9 @@ function mu_hr_registration_check_cas() {
 
 		require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
-		if ( ! lockr_get_key( 'cas_host' ) ) {
-			exit;
-		}
-
-		$cas_port    = 443;
-		$cas_context = '/cas';
-
-		if ( lockr_get_key( 'cas_port' ) ) {
-			$cas_port = intval( lockr_get_key( 'cas_port' ) );
-		}
-
-		if ( lockr_get_key( 'cas_context' ) ) {
-			$cas_context = lockr_get_key( 'cas_context' );
-		}
-
 		phpCAS::setVerbose( true );
 
-		phpCAS::client( CAS_VERSION_3_0, lockr_get_key( 'cas_host' ), 443, '/cas' );
+		phpCAS::client( CAS_VERSION_3_0, 'auth.marshall.edu', 443, '/cas' );
 		phpCAS::setNoCasServerValidation();
 		phpCAS::forceAuthentication();
 
