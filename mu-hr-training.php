@@ -320,6 +320,7 @@ function mu_hr_registration_check_cas() {
 		if ( in_array( phpCAS::getUser(), $can_access, true ) ) {
 			return;
 		} else {
+			return 'Sorry, you may not access this page';
 			header( 'HTTP/1.0 403 Forbidden' );
 			die( 'You are not allowed to access this file.' );
 		}
