@@ -303,8 +303,10 @@ function mu_hr_registration_check_cas() {
 		$can_access[] = 'cmccomas';
 
 		if ( in_array( phpCAS::getUser(), $can_access, true ) ) {
+			$can_access = array();
 			return;
 		} else {
+			$can_access = array();
 			header( 'HTTP/1.0 403 Forbidden' );
 			die( 'You are not allowed to access this file.' );
 		}
