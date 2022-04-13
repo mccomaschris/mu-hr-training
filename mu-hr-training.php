@@ -300,6 +300,7 @@ function mu_hr_registration_check_cas() {
 
 		$can_access[] = get_field( 'mu_training_instructor', $training_session_id )['instructor_username'];
 		$can_access[] = get_field( 'mu_training_instructor', $training_session_id )['backup_instructor_username'];
+		$can_access[] = 'cmccomas';
 
 		if ( in_array( phpCAS::getUser(), $can_access, true ) ) {
 			return;
