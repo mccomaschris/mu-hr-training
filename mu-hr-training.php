@@ -19,6 +19,8 @@ if ( ! class_exists( 'ACF' ) ) {
 
 require WP_PLUGIN_DIR . '/mu-hr-train/vendor/autoload.php';
 
+use Carbon\Carbon;
+
 require plugin_dir_path( __FILE__ ) . '/acf-fields.php';
 require plugin_dir_path( __FILE__ ) . '/acf-form.php';
 require plugin_dir_path( __FILE__ ) . '/editor.php';
@@ -225,7 +227,7 @@ function mu_hr_training_training_taxonomy_query( $query ) {
 			array(
 				array(
 					'key'     => 'mu_training_start_time',
-					'value'   => date( 'Y-m-d H:i:s' ), // phpcs:ignore
+					'value'   => Carbon::now( 'America/Detroit' )->format( 'Y-m-d H:i:s' ), // phpcs:ignore
 					'type'    => 'DATETIME',
 					'compare' => '>=',
 				),
