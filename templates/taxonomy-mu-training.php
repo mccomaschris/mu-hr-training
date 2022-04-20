@@ -22,6 +22,7 @@ require get_template_directory() . '/template-parts/hero/no-hero.php';
 				?>
 			</header><!-- .page-header -->
 			<?php
+			echo 'Time: ' . date('g:ia');
 			if ( have_posts() ) :
 				while ( have_posts() ) {
 					the_post();
@@ -76,7 +77,6 @@ require get_template_directory() . '/template-parts/hero/no-hero.php';
 									<?php } else { ?>
 										<div class="mt-6 btn bg-gray-300 text-gray-500 cursor-not-allowed">Course Full</div>
 									<?php } ?>
-
 								</div>
 							</div>
 						</div>
